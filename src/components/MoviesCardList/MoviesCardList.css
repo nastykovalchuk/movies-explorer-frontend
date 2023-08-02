@@ -1,0 +1,21 @@
+.cardList {
+  padding: 80px 70px 80px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 32px 20px;
+}
+
+@media (max-width: 768px) {
+  .cardList {
+    padding: 80px 30px 80px;
+    gap: 36px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cardList {
+    padding: 50px 10px 80px;
+    gap: 20px;
+  }
+}
