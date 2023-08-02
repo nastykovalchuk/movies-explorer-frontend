@@ -1,7 +1,7 @@
 # movies-explorer-frontend
 Репозиторий для приложения проекта `Movies Explorer`
 
-Макет в Figma - dark-1
+Макет в Figma: https://disk.yandex.com/d/IvRkmccE4wIf7w
 
 Адрес репозитория: https://github.com/nastykovalchuk/movies-explorer-frontend
 
