@@ -38,6 +38,10 @@
   padding: 0 0 0 22px;
 }
 
+.search-form__input:hover {
+  opacity: 0.8;
+}
+
 .search-form__input:focus {
   outline-color: transparent;
   outline-style: none;
@@ -80,7 +84,11 @@
 
 @media (max-width: 600px) {
   .search-form {
-    padding: 90px 14px 0;
+    padding: 80px 14px 0;
+  }
+
+  .search-form__fieldset-search {
+    padding: 0 0 41px;
   }
 
   .search-form__toggle-text {
@@ -89,8 +97,9 @@
   }
 
   .search-form__input {
-    font-size: 18px;
-    text-align: left;
+    font-size: 12px;
+    line-height: 18px;
+    padding-left: 16px;
   }
 
   .search-form__icon {

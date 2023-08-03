@@ -7,9 +7,13 @@ import '../Authentication.css'
 function Login() {
   return (
     <main className="auth">
-      <img src={logo} alt="Лого" className="auth__logo" />
-      <h2 className="auth__header">Рады видеть!</h2>
+      <section className="auth__wrapper">
+      <Link to='/'>
+        <img src={logo} alt="Логотип" className="auth__logo" />
+      </Link>
+      <h1 className="auth__header">Рады видеть!</h1>
       <AuthForm buttonText={"Войти"} />
+      </section>
       <p className="auth__subtext">
         Ещё не зарегистрированы?
         <Link to="/signup" className="auth__link">Регистрация</Link>

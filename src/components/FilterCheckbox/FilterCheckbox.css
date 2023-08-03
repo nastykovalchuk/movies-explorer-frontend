@@ -9,6 +9,10 @@
   cursor: pointer;
 }
 
+.filter-checkbox:hover {
+  opacity: 0.8;
+}
+
 .filter-checkbox:checked {
   background: #2BE080;
 }

@@ -9,9 +9,9 @@ function Navigation({ isLanding }) {
   return (
     <>
       {isLanding ? (
-        <nav>
-          <ul className="navigation_landing">
-            <li><Link to="/signup" className="navigation__link">Регистрация</Link></li>
+        <nav className="navigation">
+          <ul className="navigation__list navigation__list_landing">
+            <li><Link to="/signup" className="navigation__link navigation__link_landing">Регистрация</Link></li>
             <li className="navigation__button-container"><Link to="/signin" className="navigation__button">Войти</Link></li>
           </ul>
         </nav>
@@ -21,10 +21,10 @@ function Navigation({ isLanding }) {
             <ul className="navigation__list">
               {isBurgerMenuOpen && (<li><Link to="/" className="navigation__link">Главная</Link></li>)}
               <li><NavLink to="/movies" activeclassname="active" className="navigation__link">Фильмы</NavLink></li>
-              <li><NavLink to="/saved-movies"  activeclassname="active" className="navigation__link">Сохраненные фильмы</NavLink></li>
+              <li><NavLink to="/saved-movies"  activeclassname="active" className="navigation__link">Сохранённые фильмы</NavLink></li>
             </ul>
             <ul className="navigation__profile">
-              <li><Link to="/profile" className="navigation____profile-link">Аккаунт</Link></li>
+              <li><Link to="/profile" className="navigation__profile-link">Аккаунт</Link></li>
               <li>
                 <Link to="/profile" className="navigation__link">
                   <div className="navigation__icon-container">
@@ -34,7 +34,7 @@ function Navigation({ isLanding }) {
               </li>
             </ul>
           </nav>
-           <button className={`navigation__burger-button ${isBurgerMenuOpen ? "navigation__burger-button_active" : ""}`} onClick={() => setBurgerIsOpen(!isBurgerMenuOpen)}/>
+           <button type='button' className={`navigation__burger-button ${isBurgerMenuOpen ? "navigation__burger-button_active" : ""}`} onClick={() => setBurgerIsOpen(!isBurgerMenuOpen)}/>
           <div className={`navigation__overlay ${isBurgerMenuOpen ? "visible" : ""}`}/>
         </div>
       )}

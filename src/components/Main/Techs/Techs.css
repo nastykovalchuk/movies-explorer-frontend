@@ -1,5 +1,5 @@
 .techs {
-  padding: 100px 70px;
+  padding: 102px 70px 100px;
   background-color: #F5F5F5;
 }
 
@@ -53,7 +53,7 @@
 
 .techs__card {
   margin: 0;
-  padding: 21px 0 22px;
+  padding: 22px 0 22px;
   width: 90px;
   border-radius: 10px;
   background-color: #E8E8E8;
@@ -77,6 +77,8 @@
     font-size: 12px;
     line-height: 1.5;
     padding: 0 0 83px;
+    max-width: 400px;
+    letter-spacing: -0.48px;
   }
 
   .techs__card {
@@ -87,7 +89,7 @@
 
 @media (max-width: 600px) {
   .techs {
-    padding: 70px 14px;
+    padding: 57px 18px 136px;
   }
 
   .techs__header {
@@ -98,11 +100,13 @@
   .techs__subheader {
     font-size: 30px;
     padding: 60px 0 24px;
+    letter-spacing: -1.2px;
   }
 
   .techs__text {
     font-size: 11px;
     line-height: 1.5;
     padding: 0 0 50px;
+    letter-spacing: -0.44px;
   }
 }

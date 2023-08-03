@@ -36,9 +36,13 @@
   margin: 0;
 }
 
+.profile__input:hover {
+  opacity: 0.8;
+}
+
 .profile__input:focus {
-  outline-color: transparent;
   outline-style: none;
+  font-weight: 500;
 }
 
 .profile__input-name {
@@ -57,11 +61,10 @@
   color: #000;
   text-align: center;
   margin: 0;
-  padding: 0 0 106px;
+  padding: 0 0 110px;
 }
 
 .profile__button {
-  margin: 0 auto;
   background-color: transparent;
   border: 0;
   cursor: pointer;
@@ -69,7 +72,7 @@
   font-weight: 500;
   padding: 0;
   color: #000;
-  margin: 204px auto 16px;
+  margin: 207px auto 16px;
   text-align: center;
 }
 
@@ -88,11 +91,17 @@
 
 @media (max-width: 800px) {
   .profile {
-    padding: 236px 30px 269px;
+    padding: 243px 30px 269px;
   }
 
   .profile__greeting {
-    padding: 0 0 96px;
+    padding: 0 0 82px;
+    padding-left: 10px;
+  }
+  .profile__button {
+    margin-top: 198px;
+    font-size: 12px;
+    font-weight: 400;
   }
 }
 
@@ -106,12 +115,22 @@
   }
 
   .profile__greeting {
-    padding: 0 0 80px;
+    padding: 0 0 67px;
   }
 }
 
 @media (max-width: 480px) {
   .profile__fieldset {
     width: calc(100vw - 60px);
+  }
+
+  .profile__button {
+    margin-top: 366px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .profile__logout {
+    font-size: 12px;
   }
 }

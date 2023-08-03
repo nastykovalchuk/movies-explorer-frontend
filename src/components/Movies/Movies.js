@@ -13,7 +13,7 @@ function Movies() {
         <SearchForm />
         <MoviesCardList toDelete={false} />
         <section className="more">
-          <button className="more__button">Еще</button>
+          <button type='button' className="more__button">Ещё</button>
          </section>
       </main>
       <Footer />

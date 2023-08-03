@@ -4,14 +4,14 @@ import './AboutProject.css'
 function AboutProject() {
   return (
     <section className="project">
-      <h3 className="project__header">О проекте</h3>
+      <h2 className="project__header">О проекте</h2>
       <div className="project__columns">
         <div className="project__column">
-          <h4 className="project__column-header">Дипломный проект включал 5&nbsp;этапов</h4>
+          <h3 className="project__column-header">Дипломный проект включал 5&nbsp;этапов</h3>
           <p className="project__column-text">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и&nbsp;финальные доработки.</p>
         </div>
         <div className="project__column">
-          <h4 className="project__column-header">На&nbsp;выполнение диплома ушло 5&nbsp;недель</h4>
+          <h3 className="project__column-header">На&nbsp;выполнение диплома ушло 5&nbsp;недель</h3>
           <p className="project__column-text">У&nbsp;каждого этапа был мягкий и&nbsp;жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
         </div>
       </div>
