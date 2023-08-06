@@ -1,0 +1,136 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 74px 30px 70px;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__fieldset {
+  border: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: solid 1px #E8E8E8;
+  margin: 0;
+  width: 410px;
+}
+
+.profile__fieldset:last-of-type {
+  border: 0;
+}
+
+.profile__input {
+  border: none;
+  max-width: 1000px;
+  width: 100%;
+  text-align: right;
+  color: #000;
+  font-size: 11px;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+
+.profile__input:hover {
+  opacity: 0.8;
+}
+
+.profile__input:focus {
+  outline-style: none;
+  font-weight: 500;
+}
+
+.profile__input-name {
+  max-width: 141px;
+  width: 100%;
+  color: #000;
+  padding: 0;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.profile__greeting {
+  font-size: 24px;
+  font-weight: 500;
+  color: #000;
+  text-align: center;
+  margin: 0;
+  padding: 0 0 110px;
+}
+
+.profile__button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0;
+  color: #000;
+  margin: 207px auto 16px;
+  text-align: center;
+}
+
+.profile__logout {
+  margin: 0 auto;
+  font-size: 13px;
+  font-weight: 500;
+  color: #FF4062;
+  text-align: center;
+  text-decoration: none;
+}
+
+.profile__logout:hover, .profile__button:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 800px) {
+  .profile {
+    padding: 243px 30px 269px;
+  }
+
+  .profile__greeting {
+    padding: 0 0 82px;
+    padding-left: 10px;
+  }
+  .profile__button {
+    margin-top: 198px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile {
+    padding: 70px 30px 40px;
+  }
+
+  .profile__button_edit {
+    margin: 379px auto 16px;
+  }
+
+  .profile__greeting {
+    padding: 0 0 67px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile__fieldset {
+    width: calc(100vw - 60px);
+  }
+
+  .profile__button {
+    margin-top: 366px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .profile__logout {
+    font-size: 12px;
+  }
+}

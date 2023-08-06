@@ -1,0 +1,34 @@
+.filter-checkbox {
+  appearance: none;
+  outline: none;
+  width: 36px;
+  height: 20px;
+  position: relative;
+  background: #EBEBEB;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.filter-checkbox:hover {
+  opacity: 0.8;
+}
+
+.filter-checkbox:checked {
+  background: #2BE080;
+}
+
+.filter-checkbox::before {
+  content:'';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 6px;
+  left: 6px;
+  border-radius: 50%;
+  background: #F5F5F5;
+  transition: .3s;
+}
+
+.filter-checkbox:checked::before {
+  left: 23px;
+}
