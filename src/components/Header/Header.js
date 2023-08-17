@@ -10,7 +10,7 @@ function Header({ isLanding }) {
     <Link to='/'>
       <img src={logo} alt="Логотип" className="header__logo" />
     </Link>
-    <Navigation isLanding={isLanding} />
+    <Navigation />
   </header>
   );
 }

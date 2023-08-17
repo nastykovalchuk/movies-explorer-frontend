@@ -13,6 +13,7 @@
 .profile__fieldset {
   border: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 16px 0;
   border-bottom: solid 1px #E8E8E8;
@@ -25,6 +26,7 @@
 }
 
 .profile__input {
+  flex-basis:80%;
   border: none;
   max-width: 1000px;
   width: 100%;
@@ -46,6 +48,7 @@
 }
 
 .profile__input-name {
+  flex-basis:20%;
   max-width: 141px;
   width: 100%;
   color: #000;
@@ -53,6 +56,33 @@
   margin: 0;
   font-size: 11px;
   font-weight: 500;
+}
+
+.profile__input-error {
+  width: 100%;
+  padding: 6px 0 0 0;
+  text-align: end;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FF4062;
+  display: none;
+}
+
+.profile__input-error_visible {
+  display: block;
+}
+
+.profile__prompt {
+  font-size: 14px;
+  text-align: center;
+  opacity: 0;
+  transition: 1s;
+}
+
+.profile__prompt_active {
+  transition: 1s;
+  opacity: 1;
 }
 
 .profile__greeting {
@@ -87,6 +117,11 @@
 
 .profile__logout:hover, .profile__button:hover {
   opacity: 0.7;
+}
+
+.profile__button:disabled {
+  cursor: default;
+  opacity: 0.3;
 }
 
 @media (max-width: 800px) {

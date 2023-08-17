@@ -7,8 +7,8 @@
 
 ## Ссылки на проект
 
-IP 62.84.123.162
+IP 158.160.21.40
 
 Backend     https://api.movies.nastykovalchuk.nomoredomains.work
 
-Frontend    https://movies.nastykovalchuk.nomoredomains.work
+Frontend    https://movies.nastykovalchuk.nom.nomoreparties.co
