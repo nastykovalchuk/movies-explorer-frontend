@@ -5,6 +5,8 @@
 
 Адрес репозитория: https://github.com/nastykovalchuk/movies-explorer-frontend
 
+Pull requests https://github.com/nastykovalchuk/movies-explorer-frontend/pull/2
+
 ## Ссылки на проект
 
 IP 158.160.21.40
