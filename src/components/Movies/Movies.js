@@ -3,20 +3,17 @@ import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
 import SearchForm from './../SearchForm/SearchForm';
 import MoviesCardList from './../MoviesCardList/MoviesCardList';
-import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import Preloader from "../Preloader/Preloader";
-import { BIG_TABLET_SCREEN_WIDTH, ERROR_MESSAGE, MOBILE_SCREEN_WIDTH, MORE_CARDS_FOR_BIG_TABLET, MORE_CARDS_FOR_DESKTOP, MORE_CARDS_FOR_MOBILE, MORE_CARDS_FOR_TABLET, NUMBER_OF_CARDS_FOR_BIG_TABLET, NUMBER_OF_CARDS_FOR_DESKTOP, NUMBER_OF_CARDS_FOR_MOBILE, NUMBER_OF_CARDS_FOR_TABLET, SHORT_MOVIE_DURATION_IN_MINUTES, TABLET_SCREEN_WIDTH } from "../../utils/constants";
+import { BIG_TABLET_SCREEN_WIDTH, MOBILE_SCREEN_WIDTH, MORE_CARDS_FOR_BIG_TABLET, MORE_CARDS_FOR_DESKTOP, MORE_CARDS_FOR_MOBILE, MORE_CARDS_FOR_TABLET, NUMBER_OF_CARDS_FOR_BIG_TABLET, NUMBER_OF_CARDS_FOR_DESKTOP, NUMBER_OF_CARDS_FOR_MOBILE, NUMBER_OF_CARDS_FOR_TABLET, SHORT_MOVIE_DURATION_IN_MINUTES, TABLET_SCREEN_WIDTH } from "../../utils/constants";
 import './Movies.css'
 
-function Movies({ screenWidth, message, setMessage }) {
+function Movies({ allMovies, setAllMovies, screenWidth, message, isLoading }) {
 
-  const [allMovies, setAllMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [savedSearch, setSavedSearch] = useState(JSON.parse(
     localStorage.getItem('search') || '{ "searchQuery":"","shorts":false }'
   ));
-  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = React.useState(0);
 
 
@@ -57,8 +54,8 @@ function Movies({ screenWidth, message, setMessage }) {
   }
 
   useEffect(() => {
-    loadCards(savedSearch)
-  }, [savedSearch]);
+    filterMovies(savedSearch, allMovies);
+  }, [savedSearch, allMovies]);
 
   useEffect(() => {
     const localSearch = localStorage.getItem('search');
@@ -70,39 +67,6 @@ function Movies({ screenWidth, message, setMessage }) {
       filterMovies(parsedSearch, parsedMovies);
     }
   }, []);
-
-  const loadCards = (search) => {
-    if(allMovies.length === 0) {
-      setIsLoading(true);
-      Promise.all([
-        moviesApi.getMovies(),
-        mainApi.getSavedMovies()
-      ])
-        .then(([allMoviess, savedMovies]) => {
-          const movies = allMoviess.map((allMovies) => {
-            const savedMovie = savedMovies.find((savedFilm) => allMovies.id === savedFilm.movieId);
-            if(savedMovie) {
-              allMovies.isSaved = true;
-              allMovies._id = savedMovie._id;
-            }else{
-              allMovies.isSaved = false;
-            }
-            return allMovies;
-          })
-          setAllMovies(movies);
-          filterMovies(search, movies);
-          localStorage.setItem('movies', JSON.stringify(movies))
-        })
-        .catch((err) => {
-          setMessage(ERROR_MESSAGE);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        })
-    }else{
-      filterMovies(search, allMovies);
-    }
-  }
 
   const handleMovieLike = (movie) => {
     setAllMovies((state) => state.map((item) => item.id === movie.id ? movie : item));

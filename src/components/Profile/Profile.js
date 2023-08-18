@@ -5,7 +5,7 @@ import Header from './../Header/Header';
 import './Profile.css'
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-function Profile({ handleUpdateUser, handleLogout, profileResponse }) {
+function Profile({ handleUpdateUser, handleLogout, profileResponse, isLoading }) {
 
   const currentUser = useContext(CurentUserContext);
 
@@ -72,7 +72,7 @@ function Profile({ handleUpdateUser, handleLogout, profileResponse }) {
             <span className={`profile__input-error ${errors["email"] && "profile__input-error_visible"}`}>{errors["email"]}</span>
           </fieldset>
           <span className={`profile__prompt ${profileResponse ? "profile__prompt_active" : ""}`}>{profileResponse}</span>
-          <button className="profile__button" type="submit" disabled={isMatchesValue || !isValid}>
+          <button className="profile__button" type="submit" disabled={isMatchesValue || !isValid || isLoading}>
             Редактировать
           </button>
           <Link className="profile__logout" onClick={handleLogout} to="/signin"> Выйти из аккаунта </Link>

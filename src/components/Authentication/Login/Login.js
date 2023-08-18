@@ -5,7 +5,7 @@ import logo from "../../../images/logo.svg";
 import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
 import '../Authentication.css';
 
-function Login({ handleSignin, message }) {
+function Login({ handleSignin, message, isLoading }) {
 
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
@@ -24,7 +24,7 @@ function Login({ handleSignin, message }) {
         <img src={logo} alt="Логотип" className="auth__logo" />
       </Link>
       <h1 className="auth__header">Рады видеть!</h1>
-      <AuthForm buttonText={"Войти"} handleSubmit={handleSubmit} disabled={!isValid}>
+      <AuthForm buttonText={"Войти"} handleSubmit={handleSubmit} disabled={!isValid || isLoading}>
       <>
           <label className='auth__label'>E-mail</label>
           <input type="email" name="email" onChange={handleChange} className={`auth__input ${errors["email"] !== "" ? "auth__input_error" : ""}`} placeholder='example@domain.com' required/>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FilterCheckbox from "./../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-function SearchForm({setSavedSearch, savedSearch}) {
+function SearchForm({ setSavedSearch, savedSearch }) {
 
   const [isActive, setIsActive] = useState(savedSearch.shorts || false);
   const [searchQuery, setSearchQuery] = useState(savedSearch.searchQuery || "");

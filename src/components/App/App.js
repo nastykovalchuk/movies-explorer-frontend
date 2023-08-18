@@ -10,18 +10,21 @@ import Login from './../Authentication/Login/Login';
 import NotFound from './../NotFound/NotFound';
 import authApi from "../../utils/AuthApi";
 import mainApi from "../../utils/MainApi";
-import { UPDATE_PROFILE_MESSAGE, errorHeandler } from "../../utils/constants";
+import { ERROR_MESSAGE, UPDATE_PROFILE_MESSAGE, errorHeandler } from "../../utils/constants";
 
 import "./App.css";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import moviesApi from "../../utils/MoviesApi";
 
 
 function App() {
 
-  const sessionStorageAuth = JSON.parse(sessionStorage.getItem("loggedIn"));
-  const [isLoggedIn, setIsLoggedIn] = useState(sessionStorageAuth || false );
+  const localStorageAuth = JSON.parse(localStorage.getItem("loggedIn"));
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorageAuth || false );
   const [currentUser, setCurrentUser] = useState({});
+  const [allMovies, setAllMovies] = useState([]);
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const navigate = useNavigate();
@@ -47,28 +50,40 @@ function App() {
   }, [handleResize]);
 
   function handleUpdateUser(formData) {
+    setIsLoading(true);
     mainApi.patchUserInfo(formData).then((data) => {
       setCurrentUser(data);
       setMessage(UPDATE_PROFILE_MESSAGE);
     }).catch((err) => {
       setMessage(errorHeandler(err));
     })
+    .finally(() => {
+      setIsLoading(false);
+    })
   }
 
   function handleSignup(formData) {
+    setIsLoading(true);
     authApi.signUp(formData).then(() => {
       handleSignin(formData);
     }).catch((err) => {
       setMessage(errorHeandler(err));
     })
+    .finally(() => {
+      setIsLoading(false);
+    })
   }
 
   function handleSignin(formData) {
+    setIsLoading(true);
     authApi.signIn(formData).then(() => {
       setIsLoggedIn(true);
       navigate("/movies", { replace: true });
     }).catch((err) => {
       setMessage(errorHeandler(err));
+    })
+    .finally(() => {
+      setIsLoading(false);
     })
   }
 
@@ -89,7 +104,7 @@ function App() {
       .then((res) => {
         if (res) {
           setIsLoggedIn(true);
-          sessionStorage.setItem("loggedIn", "true");
+          localStorage.setItem("loggedIn", "true");
           setCurrentUser(res);
           sessionStorage.setItem("currentUser", JSON.stringify(res));
         }
@@ -99,6 +114,34 @@ function App() {
       });
   }
 
+  function loadMovies() {
+    setIsLoading(true);
+    Promise.all([
+      moviesApi.getMovies(),
+      mainApi.getSavedMovies()
+    ])
+      .then(([allMovies, savedMovies]) => {
+        const movies = allMovies.map((allMovies) => {
+          const savedMovie = savedMovies.find((savedFilm) => allMovies.id === savedFilm.movieId);
+          if(savedMovie) {
+            allMovies.isSaved = true;
+            allMovies._id = savedMovie._id;
+          }else{
+            allMovies.isSaved = false;
+          }
+          return allMovies;
+        })
+        setAllMovies(movies);
+        localStorage.setItem('movies', JSON.stringify(movies))
+      })
+      .catch((err) => {
+        setMessage(ERROR_MESSAGE);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }
+
   useEffect(() => {
     setMessage("")
   }, [navigate]);
@@ -106,6 +149,7 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) {
       handleTokenCheck();
+      loadMovies();
     }
   }, [isLoggedIn]);
 
@@ -119,9 +163,10 @@ function App() {
                       <ProtectedRoute
                       loggedIn={isLoggedIn}
                       element={Movies}
+                      allMovies={allMovies}
+                      setAllMovies={setAllMovies}
                       screenWidth={screenWidth}
                       message={message}
-                      setMessage={setMessage}
                     />
                   }
              />
@@ -129,8 +174,9 @@ function App() {
                       <ProtectedRoute
                       loggedIn={isLoggedIn}
                       element={SavedMovies}
+                      allMovies={allMovies}
+                      setAllMovies={setAllMovies}
                       message={message}
-                      setMessage={setMessage}
                     />
                   }
              />
@@ -141,6 +187,7 @@ function App() {
                       handleUpdateUser={handleUpdateUser}
                       handleLogout={handleLogout}
                       profileResponse={message}
+                      isLoading={isLoading}
                     />
                   }
              />
@@ -150,6 +197,7 @@ function App() {
                       element={Register}
                       handleSignup={handleSignup}
                       message={message}
+                      isLoading={isLoading}
                     />
                   }
              />
@@ -159,6 +207,7 @@ function App() {
                       element={Login}
                       handleSignin={handleSignin}
                       message={message}
+                      isLoading={isLoading}
                     />
                   }
             />

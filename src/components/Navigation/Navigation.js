@@ -9,7 +9,7 @@ function Navigation() {
 
   return (
     <>
-      {!JSON.parse(sessionStorage.getItem("loggedIn")) ? (
+      {!JSON.parse(localStorage.getItem("loggedIn")) ? (
         <nav className="navigation">
           <ul className="navigation__list navigation__list_landing">
             <li><Link to="/signup" className="navigation__link navigation__link_landing">Регистрация</Link></li>

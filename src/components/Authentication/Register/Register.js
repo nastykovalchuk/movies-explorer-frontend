@@ -5,7 +5,7 @@ import logo from "../../../images/logo.svg";
 import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
 import "../Authentication.css";
 
-function Register({ handleSignup, message }) {
+function Register({ handleSignup, message, isLoading }) {
 
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
@@ -25,7 +25,7 @@ function Register({ handleSignup, message }) {
         <img src={logo} alt="Логотип" className="auth__logo" />
       </Link>
       <h1 className="auth__header">Добро пожаловать!</h1>
-      <AuthForm buttonText={"Зарегистрироваться"} handleSubmit={handleSubmit} disabled={!isValid}>
+      <AuthForm buttonText={"Зарегистрироваться"} handleSubmit={handleSubmit} disabled={!isValid || isLoading}>
         <>
           <label  className="auth__label">Имя</label>
           <input type="text" name="name" onChange={handleChange} placeholder="Имя пользователя" className={`auth__input ${errors["name"] !== "" ? "auth__input_error" : ""}`} required minLength={2} maxLength={30} pattern="[а-яА-ЯёЁa-zA-Z0-9\s\-]+$"

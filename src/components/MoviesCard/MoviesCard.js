@@ -20,12 +20,10 @@ function MoviesCard({ movie, isLike, toDelete, onClickUpdate}) {
     return `${hours}ч ${minutes}м`
 }
 
-  const imgUrl = toDelete ? movie.image : `https://api.nomoreparties.co${movie.image.url}`;
-
   return (
     <div className="movie">
       <a className='movie_link' href={movie.trailerLink} target="_blank" rel="noreferrer">
-       <img className="movie__image" src={imgUrl} alt={movie.nameRU} />
+       <img className="movie__image" src={`https://api.nomoreparties.co${movie.image.url}`} alt={movie.nameRU} />
       </a>
     <div className='movie__caption'>
       <h2 className="movie__name">{movie.nameRU}</h2>

@@ -6,48 +6,35 @@ import Footer from './../Footer/Footer';
 import './SavedMovies.css'
 import mainApi from "../../utils/MainApi";
 import Preloader from "../Preloader/Preloader";
-import { ERROR_MESSAGE, SHORT_MOVIE_DURATION_IN_MINUTES } from "../../utils/constants";
+import { SHORT_MOVIE_DURATION_IN_MINUTES } from "../../utils/constants";
 
-function SavedMovies( {message, setMessage, handleSearchSubmit} ) {
+function SavedMovies({ allMovies, setAllMovies, message, handleSearchSubmit, isLoading }) {
 
-  const [sourceMovies, setSourceMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [savedSearch, setSavedSearch] = useState({ searchQuery: '', shorts: false });
-  const [isLoading, setIsLoading] = useState(false);
 
-  const filterMovies = (search, films) => {
+  const filterMovies = (search, movies) => {
     setSavedSearch(search);
-    setFilteredMovies(films.filter((movie) => {
+    setFilteredMovies(movies.filter((movie) => {
       const isValidName = movie.nameEN.toLowerCase().includes(search.searchQuery.toLowerCase()) || movie.nameRU.toLowerCase().includes(search.searchQuery.toLowerCase());
-      return search.shorts ? (isValidName && movie.duration <= SHORT_MOVIE_DURATION_IN_MINUTES) : isValidName;
+      if (movie.isSaved){
+        return search.shorts ? (isValidName && movie.duration <= SHORT_MOVIE_DURATION_IN_MINUTES) : isValidName;
+      }
     }))
   }
 
   useEffect(() => {
-    filterMovies(savedSearch, sourceMovies)
-  }, [savedSearch]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    mainApi.getSavedMovies()
-      .then((serverMovies) => {
-        setSourceMovies(serverMovies);
-        filterMovies(savedSearch, serverMovies);
-      })
-      .catch((err) => {
-        setMessage(ERROR_MESSAGE);
-      })
-      .finally(()=>{
-        setIsLoading(false);
-      });
-  }, [])
+    filterMovies(savedSearch, allMovies)
+  }, [savedSearch, allMovies]);
 
   const onClickRemove = (movie) =>{
     mainApi.deleteMovie(movie._id)
     .then(() => {
-      const updateMovies = sourceMovies.filter((item) => item._id !== movie._id)
-      setSourceMovies(updateMovies);
-      filterMovies(savedSearch, updateMovies);
+      delete movie._id;
+      movie.isSaved = false;
+      setAllMovies((state) => state.map((item) => item.id === movie.id ? movie : item));
+      localStorage.setItem('movies', JSON.stringify(allMovies));
+      filterMovies(savedSearch, movie);
     })
     .catch((err) => {
       console.log(err);
