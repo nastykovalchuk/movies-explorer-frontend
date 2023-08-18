@@ -7,6 +7,8 @@
   border: 0;
   padding: 40px 0 30px;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   gap: 10px;
   align-items: center;
 }
@@ -32,7 +34,7 @@
   border-radius: 4px;
   background-color: #F9F9F9;
   height: 48px;
-  width: 100%;
+  flex-grow: 1;
   color: #A0A0A0;
   font-size: 14px;
   padding: 0 0 0 22px;
@@ -46,6 +48,14 @@
   outline-color: transparent;
   outline-style: none;
   color: #000;
+}
+
+.search-form__error{
+  flex-basis: 100%;
+  color: #ff4062;
+  font-size: 12px;
+  font-weight: 400;
+  padding-left: 22px;
 }
 
 .search-form__icon {

@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
 import './FilterCheckbox.css'
 
-function FilterCheckbox(state = false) {
-  const [checkboxState, setCheckboxState] = useState(state)
+function FilterCheckbox({ state = false, onClick }) {
   return (
-    <input type="checkbox" className="filter-checkbox" defaultChecked={state} onClick={() => setCheckboxState(!checkboxState)} />
+    <input type="checkbox" className="filter-checkbox" checked={state} onChange={onClick} />
   )
 }
 
